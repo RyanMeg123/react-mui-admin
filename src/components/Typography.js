@@ -7,7 +7,7 @@ const StyledBox = styled(Box)(({ theme, textTransformStyle, ellipsis }) => ({
     whiteSpace: ellipsis ? 'nowrap' : 'normal',
     overflow: ellipsis ? 'hidden' : '',
     textOverflow: ellipsis ? 'ellipsis' : '',
-    // color: theme.palette.primary.contrastText,
+    color: theme.palette.primary.contrastText,
 }))
 
 export const H1 = ({

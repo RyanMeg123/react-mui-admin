@@ -5,6 +5,11 @@ export const navigations = [
         icon: 'dashboard',
     },
     {
+        name: 'Home',
+        path: '/home',
+        icon: 'home',
+    },
+    {
         label: 'PAGES',
         type: 'label',
     },

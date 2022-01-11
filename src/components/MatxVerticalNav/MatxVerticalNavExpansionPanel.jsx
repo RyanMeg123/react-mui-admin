@@ -65,8 +65,8 @@ const BulletIcon = styled('div')(({ theme }) => ({
     marginLeft: '20px',
     marginRight: '8px',
     borderRadius: '300px !important',
-    // background: theme.palette.primary.contrastText,
-    background: theme.palette.text.primary,
+    background: theme.palette.primary.contrastText,
+    // background: theme.palette.text.primary,
 }))
 
 const ItemText = styled('span')(() => ({
@@ -89,6 +89,7 @@ const MatxVerticalNavExpansionPanel = ({ item, children, mode }) => {
     const { name, icon, iconText, badge } = item
 
     const handleClick = () => {
+        console.log(11111)
         componentHeight.current = 0
         calcaulateHeight(elementRef.current)
         setCollapsed(!collapsed)

@@ -65,15 +65,15 @@ export const NotificationProvider = ({ settings, children }) => {
     }
 
     const getNotifications = async () => {
-        try {
-            const res = await axios.get('/api/notification')
-            dispatch({
-                type: 'LOAD_NOTIFICATIONS',
-                payload: res.data,
-            })
-        } catch (e) {
-            console.error(e)
-        }
+        // try {
+        //     const res = await axios.get('/api/notification')
+        //     dispatch({
+        //         type: 'LOAD_NOTIFICATIONS',
+        //         payload: res.data,
+        //     })
+        // } catch (e) {
+        //     console.error(e)
+        // }
     }
     const createNotification = async (notification) => {
         try {

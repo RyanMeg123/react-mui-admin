@@ -112,10 +112,10 @@ const NotificationBar = ({ container }) => {
                     }}
                 >
                     <Box sx={{ width: sideNavWidth }}>
-                        <Notification>
+                        {/* <Notification>
                             <Icon color="primary">notifications</Icon>
                             <h5>Notifications</h5>
-                        </Notification>
+                        </Notification> */}
 
                         {notifications?.map((notification) => (
                             <NotificationCard key={notification.id}>

@@ -14,7 +14,7 @@ import { Outlet } from 'react-router-dom'
 
 const Layout1Root = styled(Box)(({ theme }) => ({
     display: 'flex',
-    // background: theme.palette.background.default,
+    background: theme.palette.background.default,
 }))
 
 const ContentBox = styled(Box)(() => ({
@@ -98,7 +98,7 @@ const Layout1 = () => {
                 {layout1Settings.topbar.show && layout1Settings.topbar.fixed && (
                     // <Layout1Topbar fixed={true} />
                     <ThemeProvider theme={topbarTheme}>
-                        {/* <Layout1Topbar fixed={true} className="elevation-z8" /> */}
+                        <Layout1Topbar fixed={true} className="elevation-z8" />
                     </ThemeProvider>
                 )}
                 {settings.perfectScrollbar && (
@@ -107,12 +107,11 @@ const Layout1 = () => {
                             !layout1Settings.topbar.fixed && (
                                 // <Layout1Topbar />
                                 <ThemeProvider theme={topbarTheme}>
-                                    {/* <Layout1Topbar /> */}
+                                    <Layout1Topbar />
                                 </ThemeProvider>
                             )}
                         <Box flexGrow={1} position="relative">
                             <MatxSuspense>
-                                {/* {renderRoutes(routes)} */}
                                 <Outlet />
                             </MatxSuspense>
                         </Box>
@@ -128,12 +127,11 @@ const Layout1 = () => {
                             !layout1Settings.topbar.fixed && (
                                 // <Layout1Topbar />
                                 <ThemeProvider theme={topbarTheme}>
-                                    {/* <Layout1Topbar /> */}
+                                    <Layout1Topbar />
                                 </ThemeProvider>
                             )}
                         <Box flexGrow={1} position="relative">
                             <MatxSuspense>
-                                {/* {renderRoutes(routes)} */}
                                 <Outlet />
                             </MatxSuspense>
                         </Box>

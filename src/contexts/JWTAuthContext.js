@@ -2,6 +2,8 @@ import React, { createContext, useEffect, useReducer } from 'react'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 import { MatxLoading } from '../components'
+import { getCookie } from 'utils/index'
+import {peopleCountsConfig} from 'api/index'
 
 const initialState = {
     isAuthenticated: false,
@@ -127,28 +129,29 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         ; (async () => {
             try {
-                const accessToken = window.localStorage.getItem('accessToken')
+                const accessToken = getCookie("cstp-access-token-jwt")
+              console.log(accessToken,'accessToken')
+                if (accessToken) {
+                    const response = await peopleCountsConfig({gameCode: 'mpothen'})
+                    console.log(response,'response')
+                    // const { user } = response.data
 
-                if (accessToken && isValidToken(accessToken)) {
-                    setSession(accessToken)
-                    const response = await axios.get('/api/auth/profile')
-                    const { user } = response.data
-
-                    dispatch({
-                        type: 'INIT',
-                        payload: {
-                            isAuthenticated: true,
-                            user,
-                        },
-                    })
+                    // dispatch({
+                    //     type: 'INIT',
+                    //     payload: {
+                    //         isAuthenticated: true,
+                    //         user,
+                    //     },
+                    // })
                 } else {
-                    dispatch({
-                        type: 'INIT',
-                        payload: {
-                            isAuthenticated: false,
-                            user: null,
-                        },
-                    })
+                    // dispatch({
+                    //     type: 'INIT',
+                    //     payload: {
+                    //         isAuthenticated: false,
+                    //         user: null,
+                    //     },
+                    // })
+                     window.location.href = "/auth/login";
                 }
             } catch (err) {
                 console.error(err)

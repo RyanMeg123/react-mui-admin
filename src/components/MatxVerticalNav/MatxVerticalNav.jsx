@@ -13,7 +13,7 @@ const ListLabel = styled(Paragraph)(({ theme, mode }) => ({
     marginBottom: '10px',
     textTransform: 'uppercase',
     display: mode === 'compact' && 'none',
-    // color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary,
 }))
 
 const ExtAndIntCommon = {
@@ -42,7 +42,7 @@ const ExtAndIntCommon = {
 }
 const ExternalLink = styled('a')(({ theme }) => ({
     ...ExtAndIntCommon,
-    color: theme.palette.text.primary,
+    color: theme.palette.text.secondary,
 }))
 
 const InternalLink = styled(Box)(({ theme }) => ({

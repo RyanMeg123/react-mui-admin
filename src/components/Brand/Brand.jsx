@@ -11,6 +11,12 @@ const BrandRoot = styled(Box)(({ theme }) => ({
     padding: '20px 18px 20px 29px',
 }))
 
+const BrandFatherRoot = styled(Box)(()=>({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'column'
+}))
+
 const StyledSpan = styled(Span)(({ theme, mode }) => ({
     fontSize: 18,
     marginLeft: '.5rem',
@@ -27,7 +33,7 @@ const Brand = ({ children }) => {
             <Box display="flex" alignItems="center">
                 <MatxLogo />
                 <StyledSpan mode={mode} className="sidenavHoverShow">
-                    Matx
+                  CSTP ADMIN
                 </StyledSpan>
             </Box>
             <Box

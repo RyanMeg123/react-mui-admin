@@ -24,7 +24,7 @@ const Title = styled('span')(() => ({
 
 const SubTitle = styled('span')(({ theme }) => ({
     fontSize: '0.875rem',
-    // color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary,
 }))
 
 const H4 = styled('h4')(({ theme }) => ({
@@ -32,7 +32,7 @@ const H4 = styled('h4')(({ theme }) => ({
     fontWeight: '500',
     marginBottom: '16px',
     textTransform: 'capitalize',
-    // color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary,
 }))
 
 const Analytics = () => {
@@ -43,28 +43,28 @@ const Analytics = () => {
             <ContentBox className="analytics">
                 <Grid container spacing={3}>
                     <Grid item lg={8} md={8} sm={12} xs={12}>
-                        {/* <StatCards /> */}
-                        {/* <TopSellingTable />
-                        <StatCards2 /> */}
+                        <StatCards />
+                        <TopSellingTable />
+                        <StatCards2 />
                         <H4>Ongoing Projects</H4>
-                        {/* <RowCards /> */}
+                        <RowCards />
                     </Grid>
 
                     <Grid item lg={4} md={4} sm={12} xs={12}>
                         <Card sx={{ px: 3, py: 2, mb: 3 }}>
                             <Title>Traffic Sources</Title>
                             <SubTitle>Last 30 days</SubTitle>
-                            {/* <DoughnutChart
+                            <DoughnutChart
                                 height="300px"
                                 color={[
                                     palette.primary.dark,
                                     palette.primary.main,
                                     palette.primary.light,
                                 ]}
-                            /> */}
+                            />
                         </Card>
-                        {/* <UpgradeCard /> */}
-                        {/* <Campaigns /> */}
+                        <UpgradeCard />
+                        <Campaigns />
                     </Grid>
                 </Grid>
             </ContentBox>
