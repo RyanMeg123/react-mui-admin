@@ -12,8 +12,8 @@ module.exports = function(app) {
       //`api`是需要转发的请求
       target: "https://panel-cstp.oasgames.com", // 这里是接口服务器地址
       changeOrigin: true,
-      secure:false
+      secure: false,
       //   pathRewrite: { "^/widgets": "" }
-    }),
+    })
   );
 };
