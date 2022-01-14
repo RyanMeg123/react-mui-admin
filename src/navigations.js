@@ -10,6 +10,11 @@ export const navigations = [
         icon: 'home',
     },
     {
+        name: 'Register',
+        path: '/register',
+        icon: 'dns',
+    },
+    {
         label: 'PAGES',
         type: 'label',
     },

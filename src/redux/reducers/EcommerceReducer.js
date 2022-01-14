@@ -7,6 +7,7 @@ import {
     GET_CATEGORY_LIST,
     GET_RATING_LIST,
     GET_BRAND_LIST,
+    GET_GAME_LIST
 } from '../actions/EcommerceActions'
 
 const initialState = {
@@ -16,6 +17,12 @@ const initialState = {
 
 const EcommerceReducer = function (state = initialState, action) {
     switch (action.type) {
+        case GET_GAME_LIST: {
+            return {
+                ...state,
+                gameList: [...action.payload]
+            }
+        }
         case GET_PRODUCT_LIST: {
             return {
                 ...state,

@@ -1,188 +1,182 @@
-import React, { createContext, useEffect, useReducer } from 'react'
-import jwtDecode from 'jwt-decode'
-import axios from 'axios'
-import { MatxLoading } from '../components'
-import { getCookie } from 'utils/index'
-import {peopleCountsConfig} from 'api/index'
+import React, { createContext, useEffect, useReducer } from "react";
+import jwtDecode from "jwt-decode";
+import axios from "axios";
+import { MatxLoading } from "../components";
+import { getCookie } from "utils/index";
+import { coreUser } from "api/index";
+import { useDispatch } from "react-redux";
+import { getGameList,ROLES_LIST } from "redux/actions/GameSettingActions";
 
 const initialState = {
-    isAuthenticated: false,
-    isInitialised: false,
-    user: null,
-}
+  isAuthenticated: false,
+  isInitialised: false,
+  user: null
+};
 
-const isValidToken = (accessToken) => {
-    if (!accessToken) {
-        return false
-    }
-
-    const decodedToken = jwtDecode(accessToken)
-    const currentTime = Date.now() / 1000
-    return decodedToken.exp > currentTime
-}
-
-const setSession = (accessToken) => {
-    if (accessToken) {
-        localStorage.setItem('accessToken', accessToken)
-        axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`
-    } else {
-        localStorage.removeItem('accessToken')
-        delete axios.defaults.headers.common.Authorization
-    }
-}
+const setSession = accessToken => {
+  if (accessToken) {
+    localStorage.setItem("accessToken", accessToken);
+    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+  } else {
+    localStorage.removeItem("accessToken");
+    delete axios.defaults.headers.common.Authorization;
+  }
+};
 
 const reducer = (state, action) => {
-    switch (action.type) {
-        case 'INIT': {
-            const { isAuthenticated, user } = action.payload
+  switch (action.type) {
+    case "INIT": {
+      const { isAuthenticated, user } = action.payload;
 
-            return {
-                ...state,
-                isAuthenticated,
-                isInitialised: true,
-                user,
-            }
-        }
-        case 'LOGIN': {
-            const { user } = action.payload
-
-            return {
-                ...state,
-                isAuthenticated: true,
-                user,
-            }
-        }
-        case 'LOGOUT': {
-            return {
-                ...state,
-                isAuthenticated: false,
-                user: null,
-            }
-        }
-        case 'REGISTER': {
-            const { user } = action.payload
-
-            return {
-                ...state,
-                isAuthenticated: true,
-                user,
-            }
-        }
-        default: {
-            return { ...state }
-        }
+      return {
+        ...state,
+        isAuthenticated,
+        isInitialised: true,
+        user
+      };
     }
-}
+    case "LOGIN": {
+      const { user } = action.payload;
+
+      return {
+        ...state,
+        isAuthenticated: true,
+        user
+      };
+    }
+    case "LOGOUT": {
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null
+      };
+    }
+    case "REGISTER": {
+      const { user } = action.payload;
+
+      return {
+        ...state,
+        isAuthenticated: true,
+        user
+      };
+    }
+    default: {
+      return { ...state };
+    }
+  }
+};
 
 const AuthContext = createContext({
-    ...initialState,
-    method: 'JWT',
-    login: () => Promise.resolve(),
-    logout: () => { },
-    register: () => Promise.resolve(),
-})
+  ...initialState,
+  method: "JWT",
+  login: () => Promise.resolve(),
+  logout: () => {},
+  register: () => Promise.resolve()
+});
 
 export const AuthProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const Dispatch = useDispatch();
 
-    const login = async (email, password) => {
-        const response = await axios.post('/api/auth/login', {
-            email,
-            password,
-        })
-        const { accessToken, user } = response.data
 
-        setSession(accessToken)
+  const login = async (email, password) => {
+    const response = await axios.post("/api/auth/login", {
+      email,
+      password
+    });
+    const { accessToken, user } = response.data;
 
-        dispatch({
-            type: 'LOGIN',
+    setSession(accessToken);
+
+    dispatch({
+      type: "LOGIN",
+      payload: {
+        user
+      }
+    });
+  };
+
+  const register = async (email, username, password) => {
+    const response = await axios.post("/api/auth/register", {
+      email,
+      username,
+      password
+    });
+
+    const { accessToken, user } = response.data;
+
+    setSession(accessToken);
+
+    dispatch({
+      type: "REGISTER",
+      payload: {
+        user
+      }
+    });
+  };
+
+  const logout = () => {
+    setSession(null);
+    dispatch({ type: "LOGOUT" });
+  };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const accessToken = getCookie("cstp-access-token-jwt");
+
+        console.log(accessToken, "accessToken");
+        if (accessToken) {
+          const response = await coreUser();
+          console.log(response, "response");
+          const { userInfo,roles } = response.data;
+
+          dispatch({
+            type: "INIT",
             payload: {
-                user,
-            },
-        })
-    }
-
-    const register = async (email, username, password) => {
-        const response = await axios.post('/api/auth/register', {
-            email,
-            username,
-            password,
-        })
-
-        const { accessToken, user } = response.data
-
-        setSession(accessToken)
-
-        dispatch({
-            type: 'REGISTER',
-            payload: {
-                user,
-            },
-        })
-    }
-
-    const logout = () => {
-        setSession(null)
-        dispatch({ type: 'LOGOUT' })
-    }
-
-    useEffect(() => {
-        ; (async () => {
-            try {
-                const accessToken = getCookie("cstp-access-token-jwt")
-              console.log(accessToken,'accessToken')
-                if (accessToken) {
-                    const response = await peopleCountsConfig({gameCode: 'mpothen'})
-                    console.log(response,'response')
-                    // const { user } = response.data
-
-                    // dispatch({
-                    //     type: 'INIT',
-                    //     payload: {
-                    //         isAuthenticated: true,
-                    //         user,
-                    //     },
-                    // })
-                } else {
-                    // dispatch({
-                    //     type: 'INIT',
-                    //     payload: {
-                    //         isAuthenticated: false,
-                    //         user: null,
-                    //     },
-                    // })
-                     window.location.href = "/auth/login";
-                }
-            } catch (err) {
-                console.error(err)
-                dispatch({
-                    type: 'INIT',
-                    payload: {
-                        isAuthenticated: false,
-                        user: null,
-                    },
-                })
+              isAuthenticated: true,
+              user: userInfo
             }
-        })()
-    }, [])
+          });
+          dispatch({
+            type: ROLES_LIST,
+            payload: roles
+          });
+          Dispatch(getGameList());
 
-    if (!state.isInitialised) {
-        return <MatxLoading />
-    }
+        } else {
+          window.location.href = "/auth/login";
+        }
+      } catch (err) {
+        console.error(err);
+        dispatch({
+          type: "INIT",
+          payload: {
+            isAuthenticated: false,
+            user: null
+          }
+        });
+      }
+    })();
+  }, []);
 
-    return (
-        <AuthContext.Provider
-            value={{
-                ...state,
-                method: 'JWT',
-                login,
-                logout,
-                register,
-            }}
-        >
-            {children}
-        </AuthContext.Provider>
-    )
-}
+  if (!state.isInitialised) {
+    return <MatxLoading />;
+  }
 
-export default AuthContext
+  return (
+    <AuthContext.Provider
+      value={{
+        ...state,
+        method: "JWT",
+        login,
+        logout,
+        register
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export default AuthContext;

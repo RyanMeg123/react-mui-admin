@@ -7,6 +7,9 @@ import useSettings from 'hooks/useSettings'
 import { Switch, Hidden,Autocomplete,TextField } from '@mui/material'
 import { themeShadows } from '../../MatxTheme/themeColors'
 import { sidenavCompactWidth, sideNavWidth } from 'utils/constant'
+import { useDispatch,useSelector } from 'react-redux'
+import { matchSorter } from 'match-sorter'
+import { setCurrentGameCode,setCurrentLanguagesList,setCurrentGameItem } from 'redux/actions/GameSettingActions'
 
 const SidebarNavRoot = styled(Box)(({ theme, width, primaryBg, bgImgURL }) => ({
     position: 'fixed',
@@ -61,6 +64,15 @@ const Layout1Sidenav = () => {
     const { settings, updateSettings } = useSettings()
     const leftSidebar = settings.layout1Settings.leftSidebar
     const { mode, bgImgURL } = leftSidebar
+    const dispatch = useDispatch()
+    const gameList = useSelector((state) => {
+          console.log(state,'statestatestatestate')
+          return state.gameSetting.gameList
+    })
+    
+    const currentGameCode = useSelector((state) => {
+        return state.gameSetting.currentGameCode
+    })
 
     const getSidenavWidth = () => {
         switch (mode) {
@@ -86,13 +98,26 @@ const Layout1Sidenav = () => {
         updateSidebarMode({ mode: mode === 'compact' ? 'full' : 'compact' })
     }
 
+    const handleAutocompleteChange = (event,newValue) => {
+        console.log(event, newValue,'valueNew')
+        setAutoValue(newValue)
+        dispatch(setCurrentGameCode(newValue.code))
+        dispatch(setCurrentLanguagesList(newValue.languages))
+        dispatch(setCurrentGameItem(newValue))
+        window.localStorage.setItem('gameCode',newValue.code)
+    }
+
     const [options,setOptions] = useState([])
+    const [autoValue, setAutoValue] = useState(null)
+    
+    const filterOptions = (gameList,{inputValue}) =>  matchSorter(gameList,inputValue, {keys: ['name', 'publish_name','name_pinyin','code']})
 
 
     useEffect(() => {
-        setOptions([{ label: 'The Godfather', id: 1 },
-    { label: 'Pulp Fiction', id: 2 },])
-    },[])
+    console.log(gameList)
+    setAutoValue(gameList[0])
+
+    },[gameList])
 
     return (
         <SidebarNavRoot
@@ -112,22 +137,26 @@ const Layout1Sidenav = () => {
                     </Hidden>
                 </Brand>
                 <AutoBox>
-                    <Autocomplete
+                <Autocomplete
                     variant="dashed"
+                    value={autoValue}
                     disablePortal
                     id="combo-box-demo"
-                    options={options}
+                    options={gameList}
+                    onChange={(event,newValue) => {handleAutocompleteChange(event,newValue)}}
+                    filterOptions={filterOptions}
+                    getOptionLabel={(option) => option.name}
                     sx={{ 
                         width: '100%',
                         '& .MuiOutlinedInput-notchedOutline': {
                          borderColor: '#fff !important',
                         },
-                          '& .MuiAutocomplete-popper' : {
-        '& .MuiPaper-root-MuiAutocomplete-paper' : {
-            backgroundColor: '#fff',
-            color: '#222A45'
-        }
-    }
+                        '& .MuiAutocomplete-popper' : {
+                         '& .MuiPaper-root-MuiAutocomplete-paper' : {
+                            backgroundColor: '#fff',
+                            color: '#222A45',
+                         }
+                        }
                      }}
                     renderInput={(params) => <TextField {...params} label="游戏"  sx={{ 
                         '& .Mui-focused' : {

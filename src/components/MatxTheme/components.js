@@ -129,20 +129,20 @@ export const components = {
       }
     }
   },
-  MuiAutocomplete: {
-    variants: [
-        {
-          props: { variant: 'dashed' },
-          style: {
+  // MuiAutocomplete: {
+  //   variants: [
+  //       {
+  //         props: { variant: 'dashed' },
+  //         style: {
            
-          },
-        },
-        {
-          props: { variant: 'dashed', color: 'secondary' },
-          style: {
-            // border: `4px dashed ${red[500]}`,
-          },
-        },
-      ],
-    }
+  //         },
+  //       },
+  //       {
+  //         props: { variant: 'dashed', color: 'secondary' },
+  //         style: {
+  //           // border: `4px dashed ${red[500]}`,
+  //         },
+  //       },
+  //     ],
+  //   }
 };
