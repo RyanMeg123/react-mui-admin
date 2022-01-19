@@ -13,3 +13,6 @@ export { default as SimpleCard } from "./cards/SimpleCard";
 export { default as MatxTheme } from "./MatxTheme/MatxTheme";
 
 export { default as House } from "./House/House";
+export { default as CustomButton } from './CustomButton/CustomButton' 
+
+export { default as MatxAlert } from './MatxAlert/MatxAlert'

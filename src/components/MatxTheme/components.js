@@ -129,6 +129,17 @@ export const components = {
       }
     }
   },
+  MuiAlert: {
+    styleOverrides: {
+      root: {
+        borderRadius: '16px',
+        position: 'absolute',
+        top: '4%',
+        width: '80%',
+        left: '10%'
+      }
+    }
+  }
   // MuiAutocomplete: {
   //   variants: [
   //       {

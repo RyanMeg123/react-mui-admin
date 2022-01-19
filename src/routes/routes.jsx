@@ -6,6 +6,7 @@ import NotFound from 'views/NotFound'
 import dashboardRoutes from 'views/dashboard/DashboardRoutes'
 import homeRoutes from 'views/home/HomeRoutes'
 import registerRoutes from 'views/Register/RegisterRoutes'
+import managementRoutes from 'views/Management/ManagementRoutes'
 // import sessionRoutes from 'views/sessions/SessionRoutes'
 import MatxLayout from '../components/MatxLayout/MatxLayout'
 import { Navigate } from 'react-router-dom'
@@ -18,7 +19,7 @@ export const AllPages = () => {
                     <MatxLayout />
                 // </AuthGuard>
             ),
-            children: [...dashboardRoutes,...homeRoutes,...registerRoutes],
+            children: [...dashboardRoutes,...homeRoutes,...registerRoutes,...managementRoutes],
         },
         // ...sessionRoutes,
         {
