@@ -146,6 +146,13 @@ export const AuthProvider = ({ children }) => {
 
         } else {
           window.location.href = "/auth/login";
+          dispatch({
+            type: "INIT",
+            payload: {
+              isAuthenticated: false,
+              user: null
+            }
+          });
         }
       } catch (err) {
         console.error(err);

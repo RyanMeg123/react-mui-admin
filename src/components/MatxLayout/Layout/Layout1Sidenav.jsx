@@ -148,6 +148,7 @@ const Layout1Sidenav = () => {
                     getOptionLabel={(option) => option.name}
                     sx={{ 
                         width: '100%',
+                        padding: '0 5px',
                         '& .MuiOutlinedInput-notchedOutline': {
                          borderColor: '#fff !important',
                         },

@@ -16,3 +16,4 @@ export { default as House } from "./House/House";
 export { default as CustomButton } from './CustomButton/CustomButton' 
 
 export { default as MatxAlert } from './MatxAlert/MatxAlert'
+export { default as MatxTag } from './MatxTag/MatxTag'

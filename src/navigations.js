@@ -30,6 +30,23 @@ export const navigations = [
         name: "集结数据管理",
         iconText: "SI",
         path: "/management/data"
+      },
+      {
+        name: "操作日志",
+        iconText: "SI",
+        path: "/management/log"
+      }
+    ]
+  },
+  {
+    name: "留言管理",
+    path: "/message",
+    icon: "mail",
+    children: [
+      {
+        name: "留言筛选",
+        iconText: "SI",
+        path: "/message/search"
       }
     ]
   },

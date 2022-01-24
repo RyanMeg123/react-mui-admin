@@ -139,19 +139,13 @@ export const components = {
         left: '10%'
       }
     }
-  }
-  // MuiAutocomplete: {
+  },
+  // MuiLoadingButton: {
   //   variants: [
   //       {
-  //         props: { variant: 'dashed' },
+  //         props: { variant: 'logLoading' },
   //         style: {
-           
-  //         },
-  //       },
-  //       {
-  //         props: { variant: 'dashed', color: 'secondary' },
-  //         style: {
-  //           // border: `4px dashed ${red[500]}`,
+             
   //         },
   //       },
   //     ],

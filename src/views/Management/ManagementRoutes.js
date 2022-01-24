@@ -1,12 +1,17 @@
 import React, { lazy } from 'react';
 import Loadable from 'components/Loadable/Loadable';
 
-const Management = Loadable(lazy(() => import('./ManagementData')))
+const ManagementData = Loadable(lazy(() => import('./ManagementData')))
+const ManagementLog = Loadable(lazy(() => import('./ManagementLog')))
 
 const RegisterRoutes = [
     {
         path: '/management/data',
-        element: <Management/>
+        element: <ManagementData/>
+    },
+    {
+        path: '/management/log',
+        element: <ManagementLog/>
     }
 ]
 
