@@ -1,5 +1,5 @@
 import { get, put, post, patch, Delete } from "utils/request.js";
-// import { getODP } from "utils/requestODP.js";
+import { getODP } from "utils/requestODP.js";
 // 预注册用户查询
 export const preRegister = params => get("/api/pre-register/list", params);
 // 预注册用户数据下载(csv文件)
@@ -33,8 +33,8 @@ export const countryList = params =>
   get("/api/pre-register/country-list", params);
 
 // 区服管理
-// export const serversList = (params, gameCode) =>
-//   getODP(`/v6.0.0/games/${gameCode}/servers`, params);
+export const serversList = (params, gameCode) =>
+  getODP(`/v6.0.0/games/${gameCode}/servers`, params);
 // 留言状态修改
 export const messageStatus = params => patch("/api/message/status", params);
 // 留言查询
