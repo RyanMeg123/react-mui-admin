@@ -16,9 +16,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
-  TextField,
   Autocomplete
 } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -28,6 +26,7 @@ import dayjs from "dayjs";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { matchSorter } from "match-sorter";
 import { productsCreate, productsEdit } from "api/index";
+import { useNavigate } from "react-router-dom";
 
 const spin = keyframes`
 from {
@@ -87,6 +86,7 @@ const MultiActionAreaCard = props => {
     productCode,
     typeName,
     editChange,
+    jumpToListItemChange,
     type
   } = props;
   const ribbonStyle = () => {
@@ -162,7 +162,7 @@ const MultiActionAreaCard = props => {
         <Button size="small" color="primary" onClick={editChange}>
           编辑
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={jumpToListItemChange}>
           管理
         </Button>
       </CardActions>
@@ -191,6 +191,8 @@ const ListCard = () => {
       ? state.gameSetting.currentGameCode
       : window.localStorage.getItem("gameCode");
   });
+
+  const navigate = useNavigate();
 
   const [list, setList] = useState([]);
 
@@ -318,6 +320,14 @@ const ListCard = () => {
     }
   };
 
+  const jumpToListItemChange = item => {
+    navigate("/custom/listItem", {
+      state: {
+        id: item.id
+      }
+    });
+  };
+
   useEffect(() => {
     getProductListChange();
   }, [gameCode]);
@@ -349,6 +359,7 @@ const ListCard = () => {
               typeName={item.typeName}
               type={item.type}
               editChange={() => editChange(item)}
+              jumpToListItemChange={() => jumpToListItemChange(item)}
             />
           </Grid>
         ))}

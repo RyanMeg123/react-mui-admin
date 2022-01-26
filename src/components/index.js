@@ -13,12 +13,14 @@ export { default as SimpleCard } from "./cards/SimpleCard";
 export { default as MatxTheme } from "./MatxTheme/MatxTheme";
 
 export { default as House } from "./House/House";
-export { default as CustomButton } from './CustomButton/CustomButton' 
+export { default as CustomButton } from "./CustomButton/CustomButton";
 
-export { default as MatxAlert } from './MatxAlert/MatxAlert'
-export { default as MatxTag } from './MatxTag/MatxTag'
+export { default as MatxAlert } from "./MatxAlert/MatxAlert";
+export { default as MatxTag } from "./MatxTag/MatxTag";
 
-export { default as MatxDialog } from './MatxDialog/MatxDialog'
+export { default as MatxDialog } from "./MatxDialog/MatxDialog";
 
-export { default as MatxTabPanel } from './MatxTabPanel/MatxTabPanel'
-export { default as AutoComplateValidator } from './AutoComplateValidator/AutoComplateValidator'
+export { default as MatxTabPanel } from "./MatxTabPanel/MatxTabPanel";
+export { default as AutoComplateValidator } from "./AutoComplateValidator/AutoComplateValidator";
+export { default as CardItem } from "./CardItem/CardItem";
+export { default as MatxTagSub } from "./MatxTagSub/MatxTagSub";

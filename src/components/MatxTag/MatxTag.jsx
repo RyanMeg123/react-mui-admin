@@ -11,12 +11,13 @@ const TagBox = styled(Box)(() =>({
    padding: '0px 6px',
    fontSize: '16px',
    backgroundColor: 'rgba(0, 0, 0, 0.08)',
-   marginLeft: '8px'
+   marginLeft: '8px',
 })) 
 
 const MatxTag = (props) => {
+   let {...rest}= props
     return (
-      <TagBox>
+      <TagBox {...rest}>
         {props.children}
       </TagBox>
     )

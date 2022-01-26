@@ -1,8 +1,8 @@
 import React, { lazy } from "react";
 import Loadable from "components/Loadable/Loadable";
 
-const CustomProduct = Loadable(lazy(() => import("./index")));
 const ListCard = Loadable(lazy(() => import("./ListCard/index")));
+const ListItem = Loadable(lazy(() => import('./ListItem/index')))
 
 const CustomProductRoutes = [
   {
@@ -10,7 +10,11 @@ const CustomProductRoutes = [
     children: [
       {
         path: "list",
-        element: <ListCard />
+        element: <ListCard />,
+      },
+      {
+        path: "listItem",
+        element: <ListItem />
       }
     ]
   }
