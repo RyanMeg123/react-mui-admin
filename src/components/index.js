@@ -17,3 +17,8 @@ export { default as CustomButton } from './CustomButton/CustomButton'
 
 export { default as MatxAlert } from './MatxAlert/MatxAlert'
 export { default as MatxTag } from './MatxTag/MatxTag'
+
+export { default as MatxDialog } from './MatxDialog/MatxDialog'
+
+export { default as MatxTabPanel } from './MatxTabPanel/MatxTabPanel'
+export { default as AutoComplateValidator } from './AutoComplateValidator/AutoComplateValidator'

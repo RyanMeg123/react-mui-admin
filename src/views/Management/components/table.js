@@ -1,11 +1,9 @@
 import {
-  IconButton,
   Table,
   TableHead,
   TableBody,
   TableRow,
   TableCell,
-  Icon,
   TablePagination
 } from "@mui/material";
 import React from "react";

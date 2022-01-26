@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Grid, TextField, Autocomplete, Fab, Icon } from "@mui/material";
+import { Card, Grid, TextField, Autocomplete } from "@mui/material";
 import { styled } from "@mui/system";
 import { DateTimePicker } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -91,7 +91,7 @@ const Search = props => {
     getServersList();
   }, [gameCode]);
 
-  const { uid, beginTime, endTime } = props.state;
+  const { uid, beginTime, endTime,keyword } = props.state;
   return (
     <SearchRoot>
       <StyledCard>
@@ -165,7 +165,7 @@ const Search = props => {
               disablePortal
               id="combo-box-demo"
               sx={{ width: "100%" }}
-              options={serverOption}
+              options={MessageStatus}
               onChange={(event, newValue) => {
                 props.handleMessageStausChange(event, newValue);
               }}
@@ -186,6 +186,17 @@ const Search = props => {
               filterOptions={filterSeverOptions}
               getOptionLabel={option => option.server_id}
               renderInput={params => <TextField {...params} label="服务器" />}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <TextField
+              type="text"
+              name="keyword"
+              id="standard-basic"
+              sx={{ width: "100%" }}
+              label="关键字"
+              value={keyword || ""}
+              onChange={event => props.handleChange(event)}
             />
           </Grid>
         </Grid>

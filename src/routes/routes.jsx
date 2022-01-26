@@ -4,6 +4,7 @@ import homeRoutes from 'views/home/HomeRoutes'
 import registerRoutes from 'views/Register/RegisterRoutes'
 import managementRoutes from 'views/Management/ManagementRoutes'
 import messageRoutes from 'views/Message/MessageRoutes'
+import customProductRoutes from 'views/CustomProduct/CustomProductRoutes'
 import MatxLayout from '../components/MatxLayout/MatxLayout'
 import { Navigate } from 'react-router-dom'
 
@@ -13,7 +14,7 @@ export const AllPages = () => {
             element: (
                     <MatxLayout />
             ),
-            children: [...dashboardRoutes,...homeRoutes,...registerRoutes,...managementRoutes,...messageRoutes],
+            children: [...dashboardRoutes,...homeRoutes,...registerRoutes,...managementRoutes,...messageRoutes,...customProductRoutes],
         },
         // ...sessionRoutes,
         {
