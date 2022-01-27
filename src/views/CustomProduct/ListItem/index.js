@@ -26,6 +26,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 import { activitiesList, activitiesCreate, activeStatus } from "api/index";
+import { useNavigate } from "react-router-dom";
 
 const spin = keyframes`
 0% {
@@ -159,6 +160,7 @@ const BtnBox = styled(Box)(() => ({
 const ListItem = () => {
   const location = useLocation();
   console.log(location, "location");
+  const navigate = useNavigate();
   const gameCode = useSelector(state => {
     return state.gameSetting.currentGameCode
       ? state.gameSetting.currentGameCode
@@ -214,13 +216,13 @@ const ListItem = () => {
         await handleSendChange();
         break;
     }
-    await getListItemChange()
+    await getListItemChange();
   };
 
   const handleSendChange = async () => {
     let status = currentItem.status === 1 ? 2 : 1;
-    console.log(currentItem,'currentItem')
-    const res = await activeStatus({ status},currentItem.id );
+    console.log(currentItem, "currentItem");
+    const res = await activeStatus({ status }, currentItem.id);
     console.log(res);
     setDialogShow(false);
   };
@@ -269,6 +271,18 @@ const ListItem = () => {
     setCurrentItem(item);
     setBtnType(type);
     setDialogShow(true);
+  };
+
+  const handleJumpChange = type => {
+    switch (type) {
+      case "create":
+        navigate("/custom/templateCreate", {
+          state: {
+            id: currentItem.id
+          }
+        });
+        break;
+    }
   };
 
   useEffect(() => {
@@ -368,6 +382,7 @@ const ListItem = () => {
                   )}
                   status={item.status}
                   handleBtnChane={type => handleBtnChane(type, item)}
+                  handleJumpChange={type => handleJumpChange(type)}
                 />
               </Grid>
             ))}

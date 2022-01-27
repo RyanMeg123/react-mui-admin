@@ -3,6 +3,7 @@ import Loadable from "components/Loadable/Loadable";
 
 const ListCard = Loadable(lazy(() => import("./ListCard/index")));
 const ListItem = Loadable(lazy(() => import('./ListItem/index')))
+const TemplateCreate = Loadable(lazy(() => import('./TemplateCreate/TemplateCreate')))
 
 const CustomProductRoutes = [
   {
@@ -15,6 +16,10 @@ const CustomProductRoutes = [
       {
         path: "listItem",
         element: <ListItem />
+      },
+      {
+        path: "templateCreate",
+        element: <TemplateCreate />
       }
     ]
   }

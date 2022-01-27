@@ -47,7 +47,7 @@ const StyledButton = styled(Button)(() => ({
 }));
 
 const CardItem = props => {
-  const { name, activityId, createdAt, status, handleBtnChane } = props;
+  const { name, activityId, createdAt, status } = props;
   return (
     <CardRoot>
       <BoxFlexRoot>
@@ -110,7 +110,10 @@ const CardItem = props => {
               }
             }}
           >
-            <StyledButton startIcon={<AddCircleOutlineOutlinedIcon />}>
+            <StyledButton
+              startIcon={<AddCircleOutlineOutlinedIcon />}
+              onClick={() => props.handleJumpChange("create")}
+            >
               创建模版
             </StyledButton>
             <StyledButton startIcon={<SettingsBackupRestoreOutlinedIcon />}>
@@ -127,7 +130,7 @@ const CardItem = props => {
             </StyledButton>
             <StyledButton
               startIcon={<SendOutlinedIcon />}
-              onClick={() => props.handleBtnChane('send')}
+              onClick={() => props.handleBtnChane("send")}
             >
               发布
             </StyledButton>
