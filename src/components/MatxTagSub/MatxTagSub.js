@@ -27,7 +27,7 @@ const MatxTagSub = props => {
     }
   };
   const TagBox = styled("div")(() => ({
-    padding: "4px 12px",
+    padding: "2px 12px",
     fontWeight: 600,
     fontSize: "12px",
     textAlign: 'center',

@@ -6,8 +6,7 @@ import { peopleCountLog } from "api/index";
 import { useSelector } from "react-redux";
 import { LocalizationProvider, DateRangePicker, LoadingButton } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-// import LocalizationProvider from "@mui/lab/LocalizationProvider";
-// import DateRangePicker from "@mui/lab/DateRangePicker";
+
 import dayjs from "dayjs";
 
 const ManagementBox = styled("div")(() => ({
@@ -167,8 +166,6 @@ const ManagementLog = () => {
   useEffect(() => {
     getTableChange();
   }, [gameCode]);
-
-  const { operator } = state;
 
   return (
     <ManagementBox>

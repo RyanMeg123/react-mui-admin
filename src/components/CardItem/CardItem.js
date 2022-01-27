@@ -47,11 +47,11 @@ const StyledButton = styled(Button)(() => ({
 }));
 
 const CardItem = props => {
-  const {} = props;
+  const { name, activityId, createdAt, status, handleBtnChane } = props;
   return (
     <CardRoot>
       <BoxFlexRoot>
-        <BoxStyled>titletititlle</BoxStyled>
+        <BoxStyled>{name}</BoxStyled>
         <Icon
           sx={{
             fontSize: "17px !important",
@@ -80,7 +80,7 @@ const CardItem = props => {
                 component="span"
                 sx={{ color: "#111827", fontSize: "12px !important" }}
               >
-                活动ID:160027777643764
+                活动ID:{activityId}
               </Box>
             </MatxTag>
             <MatxTag sx={{ marginLeft: "10px", marginTop: "10px" }}>
@@ -98,7 +98,7 @@ const CardItem = props => {
                 component="span"
                 sx={{ color: "#111827", fontSize: "12px !important" }}
               >
-                创建时间:2022/01/26 15:27:17
+                创建时间:{createdAt}
               </Box>
             </MatxTag>
           </BoxFlexRoot>
@@ -125,17 +125,16 @@ const CardItem = props => {
             <StyledButton startIcon={<ArrowCircleUpOutlinedIcon />}>
               上传配置
             </StyledButton>
-            <StyledButton startIcon={<SendOutlinedIcon />}>发布</StyledButton>
+            <StyledButton
+              startIcon={<SendOutlinedIcon />}
+              onClick={() => props.handleBtnChane('send')}
+            >
+              发布
+            </StyledButton>
           </BoxFlexRoot>
         </FlexColumnRoot>
-        <MatxTagSub
-          type="red"
-          sx={{
-            width: "80px"
-          }}
-        >
-          未发布
-        </MatxTagSub>
+        {status === 1 && <MatxTagSub type="red">未发布</MatxTagSub>}
+        {status === 2 && <MatxTagSub type="green">已发布</MatxTagSub>}
       </FlexBetweenRoot>
     </CardRoot>
   );
