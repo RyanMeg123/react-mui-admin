@@ -1,19 +1,23 @@
 import * as React from "react";
 import { ReactSortable } from "react-sortablejs";
-import { FormControl, FormControlLabel, FormGroup } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  InputLabel,
+  Input,
+  FormHelperText,
+  Grid,
+  Icon,
+  FormLabel,
+  InputBase,
+  TextField,
+  OutlinedInput
+} from "@mui/material";
 // import  {ControlLabel, FormControl, FormGroup} from 'rsuite';
 import { nanoid } from "nanoid";
-
-// interface IState {
-//     list: Array<IFormNode>
-// }
-
-/**
- *
- * @author lk
- * @date 2020/6/30 10:11
- * @version 1.0
- */
+import { Button, Box } from "@mui/material";
+import { styled } from "@mui/system";
 
 export const Itype = {
   Shared: "Shared",
@@ -23,13 +27,18 @@ export const Itype = {
   Col: "Col",
   Control: "Control"
 };
+
+const StyledIcon = styled(Icon)(() => ({}));
+
+const PanleRoot = styled("div")(() => ({
+  "& .MuiBox-root:not(:first-of-type)": {
+    marginTop: "10px"
+  }
+}));
+
 export default class InputGroup extends React.Component {
   CustomComponent = React.forwardRef((props, ref) => {
-    return (
-      <div ref={ref} className={"app-from-left-controller-group-panle"}>
-        {props.children}
-      </div>
-    );
+    return <PanleRoot ref={ref}>{props.children}</PanleRoot>;
   });
 
   getNewData = () => {
@@ -37,29 +46,29 @@ export default class InputGroup extends React.Component {
       list: [
         {
           id: nanoid(),
-          type: "Input",
+          type: "Text",
           controls: (list, item, onRefresh) => (
-            <FormGroup>
-              <FormControlLabel label="单行文本框"></FormControlLabel>
-              <FormControl name="name" {...item?.properties} />
-            </FormGroup>
+            <FormControl name="name" {...item?.properties} omponent="fieldset">
+              <Box>文本框</Box>
+              <FormLabel component="legend">This is a Text</FormLabel>
+            </FormControl>
           ),
-          name: "文本框"
+          name: "文字",
+          background: "rgb(255, 244, 229)",
+          icon: "text_fields"
         },
         {
           id: nanoid(),
           type: "Input",
           controls: (list, item, onRefresh) => (
-            <FormGroup>
-              <FormControlLabel abel="多行文本框">多行文本框</FormControlLabel>
-              <FormControl
-                componentClass="textarea"
-                name="name"
-                {...item?.properties}
-              />
-            </FormGroup>
+            <FormControl name="name" {...item?.properties} omponent="fieldset">
+              <Box>文本框</Box>
+              <OutlinedInput/>
+            </FormControl>
           ),
-          name: "多行文本框"
+          name: "输入框",
+          background: "rgb(229, 250, 251)",
+          icon: "input"
         }
       ]
     };
@@ -74,7 +83,7 @@ export default class InputGroup extends React.Component {
     const { list } = this.state;
     return (
       <div className={"app-from-left-controller-group"}>
-        <p>输入型控件</p>
+        <p style={{ fontWeight: 600 }}>基础字段</p>
         <ReactSortable
           tag={this.CustomComponent}
           list={list}
@@ -89,13 +98,29 @@ export default class InputGroup extends React.Component {
           fallbackOnBody={true}
           invertSwap={true}
           setList={newState => {
+            console.log(newState, "newState");
             this.setState({ list: this.getNewData() });
           }}
         >
-          {list.map((item,index) => (
-            <div className={"app-from-left-controller-group-item"} key={index}>
-              <small>{item.name}</small>
-            </div>
+          {list.map((item, index) => (
+            <Box
+              key={index}
+              sx={{
+                background: `${item.background}`,
+                padding: "16px",
+                borderRadius: "15px",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                cursor: "pointer"
+              }}
+            >
+              <StyledIcon>{item.icon}</StyledIcon>
+              <Box sx={{ color: "rgba(0, 0, 0, 0.87)", paddingLeft: "5px" }}>
+                {item.name}
+              </Box>
+            </Box>
           ))}
         </ReactSortable>
       </div>

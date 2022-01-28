@@ -29,10 +29,10 @@ export function getTreeDataByKey(childs = [], findKey) {
   let findItem = null;
   for (let i = 0, len = childs.length; i < len; i++) {
     let item = childs[i];
-    if (item.key !== findKey && item.children && item.children.length > 0) {
+    if (item.id !== findKey && item.children && item.children.length > 0) {
       findItem = getTreeDataByKey(item.children, findKey);
     }
-    if (item.key === findKey) {
+    if (item.id === findKey) {
       findItem = item;
     }
     if (findItem != null) {

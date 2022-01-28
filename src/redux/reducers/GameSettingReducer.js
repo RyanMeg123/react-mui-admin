@@ -3,7 +3,8 @@ import {
   CURRENT_GAME_CODE,
   ROLES_LIST,
   LANGUAGES_LIST,
-  CURRENT_GAME_ITEM
+  CURRENT_GAME_ITEM,
+  DRAWER_SHOW
 } from "../actions/GameSettingActions";
 
 const initialState = {
@@ -11,7 +12,8 @@ const initialState = {
   gameList: [],
   roleList: null,
   languagesList: [],
-  currentGameItem: null
+  currentGameItem: null,
+  drawerShow: false
 };
 
 const GameSettingsReducer = function(state = initialState, action) {
@@ -47,6 +49,13 @@ const GameSettingsReducer = function(state = initialState, action) {
       return {
         ...state,
         currentGameItem: action.payload
+      };
+    }
+
+    case DRAWER_SHOW: {
+      return {
+        ...state,
+        drawerShow: action.payload
       };
     }
     default: {

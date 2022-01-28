@@ -1,0 +1,12 @@
+.app-from-controller-select-item {
+    background: #ecf5ff;
+    border: 1px dashed #409eff !important;
+}
+.app-from-center-controller-group-item {
+    padding: 10px 5px;
+    border: 1px dashed #ccc;
+    cursor: pointer;
+}
+.app-from-center-controller-group-item:not(:first-child) {
+    margin-top: 10px
+}

@@ -5,6 +5,7 @@ export const CURRENT_GAME_CODE = "CURRENT_GAME_CODE";
 export const ROLES_LIST = "ROLES_LIST";
 export const LANGUAGES_LIST = "LANGUAGES_LIST";
 export const CURRENT_GAME_ITEM = "CURRENT_GAME_ITEM";
+export const DRAWER_SHOW = "DRAWER_SHOW";
 
 export const getGameList = () => dispatch => {
   accessGames().then(res => {
@@ -38,5 +39,12 @@ export const setCurrentGameItem = gameItem => dispatch => {
   dispatch({
     type: CURRENT_GAME_ITEM,
     payload: gameItem
+  });
+};
+
+export const setDrawerShow = payload => dispatch => {
+  dispatch({
+    type: DRAWER_SHOW,
+    payload: payload
   });
 };
