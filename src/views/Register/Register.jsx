@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Profiler } from 'react'
 import { Box, styled} from '@mui/system'
 import { Button,Alert,Snackbar,Slide } from '@mui/material'
 
@@ -141,9 +141,17 @@ const  Register  = () => {
     
   }
 
+  const callback = (id, phase, actualTime, baseTime, startTime, commitTime) => {
+    console.log(`${id}'s ${phase} phase:`);
+    console.log(`Actual time: ${actualTime}`);
+    console.log(`Base time: ${baseTime}`);
+    console.log(`Start time: ${startTime}`);
+    console.log(`Commit time: ${commitTime}`);
+}
 
     return (
         <>
+        <Profiler id="Movies" onRender={callback}>
           <RegisterRoot>
           {/* <PreRegister/> */}
               <Search handleChange={handleChange} state={state} handleBeginTimeChange={handleBeginTimeChange} handleEndTimeChange={handleEndTimeChange} handleAutocompleteCountryChange={handleAutocompleteCountryChange} handleAutocompleteMethodChange={handleAutocompleteMethodChange} handleAutocompleteLanguagesChange={handleAutocompleteLanguagesChange} handleAutocompleteDeviceChange={handleAutocompleteDeviceChange}/>
@@ -176,6 +184,7 @@ const  Register  = () => {
                     This is a success message!
                 </Alert>
             </Snackbar>
+            </Profiler>
         </>
     )
 }

@@ -66,7 +66,7 @@ const Search = props => {
   });
 
   const currentLanguagesList = useSelector(
-    state => state.gameSetting.currentGameItem.languages
+    state => state.gameSetting.currentGameItem?.languages
   );
 
   useEffect(() => {

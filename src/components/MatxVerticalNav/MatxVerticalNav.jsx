@@ -1,10 +1,12 @@
 import { styled, Box } from '@mui/system'
-import React, { Fragment } from 'react'
+import React, { Fragment,Suspense } from 'react'
 import { NavLink } from 'react-router-dom'
 import useSettings from 'hooks/useSettings'
 import { Paragraph, Span } from '../Typography'
-import { Icon, ButtonBase } from '@mui/material'
+import { Icon } from '@mui/material'
 import MatxVerticalNavExpansionPanel from './MatxVerticalNavExpansionPanel'
+
+const ButtonBase = React.lazy(() => import('@mui/material/ButtonBase'))
 
 const ListLabel = styled(Paragraph)(({ theme, mode }) => ({
     fontSize: '12px',
@@ -111,6 +113,7 @@ const MatxVerticalNav = ({ items }) => {
                         rel="noopener noreferrer"
                         target="_blank"
                     >
+                    <Suspense fallback={<div>Loading...</div>}>
                         <ButtonBase
                             key={item.name}
                             name="child"
@@ -142,6 +145,7 @@ const MatxVerticalNav = ({ items }) => {
                                 <BadgeValue>{item.badge.value}</BadgeValue>
                             )}
                         </ButtonBase>
+                        </Suspense>
                     </ExternalLink>
                 )
             } else {

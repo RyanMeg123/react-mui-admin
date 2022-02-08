@@ -1,7 +1,8 @@
-import React from 'react'
+import React,{Suspense} from 'react'
 import { Small } from "../Typography"
 import { styled, useTheme } from '@mui/system'
-import { Grid, LinearProgress, Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
+const LinearProgress = React.lazy(() => import('@mui/material/LinearProgress'))
 
 const CustomLinearProgress = styled(LinearProgress)(() => ({
     borderRadius: 2,
@@ -25,11 +26,13 @@ const MatxProgressBar = ({
             alignItems="center"
         >
             <Grid item xs={text ? 8 : 12}>
+            <Suspense fallback={<div>Loading...</div>}>
                 <CustomLinearProgress
                     color={color}
                     value={value}
                     variant="determinate"
                 ></CustomLinearProgress>
+                </Suspense>
             </Grid>
             {text !== '' && (
                 <Grid item xs={text ? 4 : false}>

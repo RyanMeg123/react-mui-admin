@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import { debounce } from 'lodash';
+
 import {
   Card,
   Typography,
@@ -70,7 +72,8 @@ const ManagementData = () => {
   });
 
   const handleTextFiledChange = e => {
-    setState({ ...state, [e.target.name]: e.target.value });
+    e.persist();
+    debounce(() => setState({ ...state, [e.target.name]: e.target.value }))
   };
 
   const { multiple, baseNum, autoTargetNum } = state;
@@ -129,6 +132,11 @@ const ManagementData = () => {
 
   useEffect(() => {
     getDetailChange();
+    document.addEventListener("touchstart", function(e) {
+        console.log(e.defaultPrevented,'900'); // 将是 false
+        e.preventDefault(); // 什么都不做，因为监听器是被动的
+        console.log(e.defaultPrevented); // 还是假
+      });
   }, [gameCode]);
 
   return (

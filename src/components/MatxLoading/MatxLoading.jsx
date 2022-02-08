@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {Suspense}from 'react'
 import { Box, styled } from '@mui/system'
-import { CircularProgress } from '@mui/material'
+// import { CircularProgress } from '@mui/material'
+
+const CircularProgress = React.lazy(() => import('@mui/material/CircularProgress'))
 
 const StyledLoading = styled('div')(() => ({
     width: '100%',
@@ -26,7 +28,9 @@ const Loading = () => {
         <StyledLoading>
             <Box position="relative">
                 {/* <img src="/assets/images/logo-circle.svg" alt="" /> */}
+                <Suspense fallback={<div>Loading...</div>}>
                 <CircularProgress className="circleProgress" />
+                </Suspense>
             </Box>
         </StyledLoading>
     )
